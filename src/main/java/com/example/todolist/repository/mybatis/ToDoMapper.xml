@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.todolist.repository.mybatis.ToDoMapper">
+	<select id = "selectAll" resultType="com.example.todolist.model.ToDo">
+		SELECT * FROM todolist
+		ORDER BY #{id, jdbcType=INTEGER}
+	</select>
+	<select id = "select" resultType="com.example.todolist.model.ToDo">
+		SELECT * FROM todolist
+		WHERE id = #{id, jdbcType=INTEGER}
+	</select>
+	<update id="update" parameterType="com.example.todolist.model.ToDo">
+		UPDATE todolist 
+		SET 
+			title = #{toDo.title, jdbcType=VARCHAR},
+			details = #{toDo.details, jdbcType=VARCHAR},
+			status = #{toDo.status, jdbcType=VARCHAR},
+			updated_at = CURRENT_TIMESTAMP
+		WHERE id = #{toDo.id, jdbcType=INTEGER}
+	</update>
+	<insert id="insert" parameterType="com.example.todolist.model.ToDo">
+		INSERT INTO todolist
+		(title, details, status)
+		VALUES(
+			#{title, jdbcType=VARCHAR},
+			#{details, jdbcType=VARCHAR},
+			#{status, jdbcType=VARCHAR}
+		)
+	</insert>
+	<delete id="delete">
+	 DELETE FROM todolist 
+	 WHERE id = #{id ,jdbcType=INTEGER}
+	</delete>
+</mapper>

@@ -13,11 +13,10 @@ import lombok.Data;
 public class ToDo {
 	
 	public enum Status{
-		NOT_STARTED,
-		IN_PROGRESS,
-		COMPLETED
+		未着手,
+		進行中,
+		完了
 	}
-
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -25,8 +24,9 @@ public class ToDo {
 	
 	private String title;
 	private String details;
-	
 	@Enumerated(EnumType.STRING)
     private Status status;
-
+	private String createdAt;
+	private String updatedAt;
+	
 }
